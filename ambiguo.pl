@@ -7,12 +7,25 @@
 %par(s,[1]).
 %par(v,[1,0,1]).
 
-%defenir ordem lexicografica para as letras
+%gerar combinação de palavras
 
 
 %concatenação
 append([], List, List).
 append([Head|Tail], List, [Head|Rest]) :- append(Tail, List, Rest).
+
+prefixo([], _).
+prefixo([X|A], [X|B]) :- prefixo(A, B).
+
+sufixo(A, A).
+sufixo(A, [_|B]) :- sufixo(A, B).
+
+sublista(S, L) :- prefixo(P, L), sufixo(S, P).
+
+%letterList()
+word([],[]).
+%word(ListLetter, Combi) :- 
+
 
 %defenir ordem de comprimento das listas binarias
 %comprimento
@@ -28,7 +41,6 @@ compr([_|T], X) :- compr(T, Y), X is Y+1.
 
 
 
-lt(letter(_,V1),letter(_,V2)) :- V1 < V2.
 
 %para descobrir as varias letras de T2, será necessário selecionar os 
 % codigos binarios que sao subpartes de M, depois as respetivas letras serão T2
@@ -36,10 +48,6 @@ lt(letter(_,V1),letter(_,V2)) :- V1 < V2.
 same([],[]).
 same([H1|T1],[H2|T2]) :- H1=H2,T1=T2,same(T1,T2).
 
-subcod([],[]).
-subcod(1,[1]).
-subcod(0,[0]).
-subcod([H|T],R) :- subcod(H,R1),subcod(T,R2),append(R1,R2,R).
 
 
 
@@ -48,14 +56,15 @@ subcod([H|T],R) :- subcod(H,R1),subcod(T,R2),append(R1,R2,R).
 
 
 %-----------------------------------main----------------------------
-bin([0,1,0]).
-bin([0,1]).
 
 %cod((BIN,LETTER))) :- (BIN,LETTER).
 
 %montar a BD
 parIteration([]).
 parIteration([(L,BIN)|T]) :- assertz(cod(L,BIN)), parIteration(T).
+
+letter([A]) :- cod(A,_).
+bin(B) :- cod(_,B).
 
 ambiguo(List, _, _, _) :- parIteration(List).
 
