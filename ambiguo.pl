@@ -22,9 +22,10 @@ sufixo(A, [_|B]) :- sufixo(A, B).
 
 sublista(S, L) :- prefixo(P, L), sufixo(S, P).
 
-%letterList()
-word([],[]).
-%word(ListLetter, Combi) :- 
+catena([], L, L).
+catena([X|Xs], L, [X|Y]) :- catena(Xs, L, Y).
+
+
 
 
 %defenir ordem de comprimento das listas binarias
@@ -51,23 +52,38 @@ same([H1|T1],[H2|T2]) :- H1=H2,T1=T2,same(T1,T2).
 
 
 
-%subcod(T,_), append(R,  , subcod(H,_)).
 
 
 
 %-----------------------------------main----------------------------
 
-%cod((BIN,LETTER))) :- (BIN,LETTER).
 
 %montar a BD
-parIteration([]).
-parIteration([(L,BIN)|T]) :- assertz(cod(L,BIN)), parIteration(T).
+bdMount([]).
+bdMount([(L,BIN)|T]) :- assertz(cod(L,BIN)), bdMount(T).
 
-letter([A]) :- cod(A,_).
+
+
+
+
+
+codList([A],B) :-  cod(A,B).
+codList([H1|T1],R) :-  cod(H1,B),codList(T1,R1),append(R1,B,R).
+
+
+
+
+
+
+
+letter(A) :- cod(A,_).
 bin(B) :- cod(_,B).
 
-ambiguo(List, _, _, _) :- parIteration(List).
+ambiguo(List, _, _, _) :- \+ compr(List, 0),bdMount(List). 
 
-%procedimentos para determinar M,T1 e T2
+%, combinations(List,Words,Binary).
 
+%procedimentos para gerar as combinações possiveis
+
+%makeList(L,R) :- 
 
