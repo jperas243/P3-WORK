@@ -1,5 +1,29 @@
-[ambiguo].
-
 ambiguo([(a,[0,1,0]),(c,[0,1]),(j,[0,0,1]),(l,[1,0]),(p,[0]),(s,[1]),(v,[1,0,1])],M,T1,T2). 
 
+letter(A).
+word(1,A).
+wordBin(1,A).
+deCode([a,a],A).
+
+deCodeWords(1,A,R).
+
+wordList(1,R).
+
+[words].
+
+codeTo([0,1],L). 
+
+ambiguos([0,1,0],M).
+
+wordsLessThan(1,R).
+
+wordLetters(1,A).
+
+sameBin(1,T2,T1,M).
+
 codList(A,B).
+
+sublista(S, [0, 1]).
+
+trace.
+notrace.
