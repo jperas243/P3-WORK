@@ -9,9 +9,15 @@ deCodeWords(1,A,R).
 
 wordList(1,R).
 
+codeTo([1],[],[],1).
+
 [words].
 
+giveMeTheSauce(1,R).
+
 codeTo([0,1],L). 
+
+codeTo([[a],[c],[j],[l],[p],[s],[v]],[0,1],[],R).
 
 ambiguos([0,1,0],M).
 
