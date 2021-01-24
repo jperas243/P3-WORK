@@ -26,28 +26,40 @@ ambiguo(List, _, _, _) :- \+ compr(List, 0),bdMount(List).
 same([],[]).
 same([H1|T1],[H2|T2]) :- H1=H2,T1=T2,same(T1,T2).
 
+lessThanEqual([],S) :- S >= 0.
+lessThanEqual([H1|T1],S) :- X = S - 1, lessThanEqual(T1,X).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %letterToList(R) :- 
 
 
 wordBin(0, []).
-wordBin(N, [C|W],[B1|B2]) :-
+wordBin(N, [C|W]) :-
     N > 0,
     N1 is N-1,
     cod(C,_),
     wordBin(N1,W).
 
 
+wordBinaries(S,Z,A,B) :- words(S,A),deCode(A,B),lessThanEqual(B,Z).
+findAmbigous(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2),!.
+subWords(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2).
+
+result(C,L,M) :- findAmbigous(1,2,_,C,M), findall(Y,subWords(1,2,Y,C,_),L).
+
+isSubBinarieOf(B1,B2) :- findall(X,sublista(X,B2),R),member(B1,R).
 
 
-deCode(A,R) :- deCode(A,[],R).
-deCode([],List,List).
-deCode([H1|T1],List,R) :- 
-    
-    cod(H1,H2),
-    deCode(T1,List,R1),
-    append(H2,R1,R).
+
+wordBinariesLessThan(S,Z,A,B) :- wordBinariesLessThan(S,Z,0,A,B).
+wordBinariesLessThan(_,Z,Z,[],[]).
+wordBinariesLessThan(S,Z,Count,A,B) :- 
+
+                wordBinaries(S,Z,A,B),
+                N1 is Count+1,
+                Z1 is Z+1,
+                wordBinariesLessThan(S,Z1,N1,_,_).
+
 
 
 wordsLessThan(S,R) :- wordsLessThan(S,0,[],R).
@@ -61,6 +73,26 @@ wordsLessThan(S,Count,List,R) :-
         append(R1,R2,R).
 
 wordList(S,R) :-  findall(X,wordBin(S,X),R).
+words(S,A) :- wordsLessThan(S,R), member(A,R).
+
+
+
+
+
+
+
+
+
+deCode(A,R) :- deCode(A,[],R).
+deCode([],List,List).
+deCode([H1|T1],List,R) :- 
+    
+    cod(H1,H2),
+    deCode(T1,List,R1),
+    append(H2,R1,R).
+
+
+
 
 
 

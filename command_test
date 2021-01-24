@@ -1,17 +1,31 @@
+[words].
 ambiguo([(a,[0,1,0]),(c,[0,1]),(j,[0,0,1]),(l,[1,0]),(p,[0]),(s,[1]),(v,[1,0,1])],M,T1,T2). 
+ambiguo([(a, [0,1,1,0]),(b, [0,1,1,1,1,1]),(c, [1,1,0,0,1,1,1,1]),(f, [1,0,1,1,1,0]),(j, [0,1,0]),(l, [0,1,0,0]),(r, [0,1,1,1,0])], M, T1, T2).
+
+result(C,L,M).
+
+
+
+
+
+words(1,A).
+findAmbigous(1,2,A1,A2,B2).
+wordBinariesLessThan(1,1,A,B).
+wordBinaries(1,1,A,B).
+isSubBinarieOf([0],[1,0]). 
 
 letter(A).
 word(1,A).
 wordBin(1,A).
 deCode([a,a],A).
 
+wordBinaries(1,1,A,B).
 deCodeWords(1,A,R).
 
 wordList(1,R).
 
 codeTo([1],[],[],1).
 
-[words].
 
 giveMeTheSauce(1,R).
 
