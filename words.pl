@@ -42,13 +42,13 @@ wordBin(N, [C|W]) :-
 
 
 wordBinaries(S,Z,A,B) :- words(S,A),deCode(A,B),lessThanEqual(B,Z).
-findAmbigous(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2),!.
-subWords(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2).
+findAmbigous(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2),\+ isSubWordOf(A1,A2),!.
 
-result(C,L,M) :- findAmbigous(1,2,_,C,M), findall(Y,subWords(1,2,Y,C,_),L).
+subWords(S,Z,A1,A2,B2) :- wordBinaries(S,Z,A1,B1),wordBinaries(S,Z,A2,B2),\+ same(A1,A2),isSubBinarieOf(B1,B2),\+ isSubWordOf(A1,A2).
+result(C,L,M) :- findAmbigous(3,18,_,C,M), findall(Y,subWords(3,18,Y,C,_),L).
 
 isSubBinarieOf(B1,B2) :- findall(X,sublista(X,B2),R),member(B1,R).
-
+isSubWordOf(A1,A2) :- findall(X,sublista(X,A2),R),member(X,R),same(X,A1).
 
 
 wordBinariesLessThan(S,Z,A,B) :- wordBinariesLessThan(S,Z,0,A,B).
@@ -77,12 +77,6 @@ words(S,A) :- wordsLessThan(S,R), member(A,R).
 
 
 
-
-
-
-
-
-
 deCode(A,R) :- deCode(A,[],R).
 deCode([],List,List).
 deCode([H1|T1],List,R) :- 
@@ -98,14 +92,7 @@ deCode([H1|T1],List,R) :-
 
 
 
-binariesOf(S,R) :- wordsLessThan(1,Words),binariesOf(S,Words,[],R).
-binariesOf([],List,List).
 
-
-binariesOf(S,[H1|T1],[],R) :-
-
-        deCode(H1,B1),
-        compr(B1,S).
 
 
 
