@@ -40,17 +40,72 @@
 
 % -------------------------------------------------------------------------------------------
 \section{Introdução} 
+\hspace{0,5cm}Neste trabalho foi solicitado a realização de um programa que encontre 
+\textbf{Palavras Ambíguas} numa gramática binária, como representado na figura abaixo.
 
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{images/gramatica.png}
+        \caption{Exemplo de uma grmática binária}
+    \end{center}
+\end{figure}
+
+% -------------------------------------------------------------------------------------------
+\section{Implementação}
+
+\hspace{0,5cm}Inicialmente pensámos como deveríamos proceder para realizar o trabalho, ou seja,
+começámos por fazer o "pensamento" em papel. 
+
+De seguida na nossa primeira tentativa começamos por implementar tudo em \textbf{Prolog}, mas 
+chegamos à conclusão de que o nosso pensamento seria necessário ser feito na linguagem \textbf{OCaml}.
+
+Então na nossa segunda tentativa
+% -------------------------------------------------------------------------------------------
+\section{Funções}
+
+\subsection{Funções Auxiliares}
+
+\begin{itemize}
+    \item \verb|getWord| - recebe um \textbf{tuplo} e devolve a 2ª posição (\textbf{word});
+    \item \verb|getBin| - recebe um \textbf{tuplo} e devolve a 1ª posição (\textbf{binário});
+    \item \verb|convert| - recebe um \textbf{tuplo} em que a 1ª posição é um \textbf{char} e 
+    converte essa 1ª posição do \textbf{tuplo} em uma \textbf{lista} que contem uma \textbf{string}
+    e devolve esse \textbf{tuplo} modificado;
+    \item \verb|convertList| - recebe uma \textbf{lista} de \textbf{tuplos} e utiliza o \verb|convert|
+    em cada um dos seus \textbf{tuplos} e devolve essa \textbf{lista} convertida;
+    \item \verb|printWord| - recebe uma \textbf{lista} de \textbf{strings} (\textbf{words}) e 
+    \textit{printa} usando a função \verb|print_string|;
+    \item \verb|printBin| - recebe uma \textbf{lista} de \textbf{inteiros} (\textbf{bins}) e 
+    \textit{printa} usando a função \verb|print_int|;
+    \item \verb|printWordList| - recebe uma \textbf{lista} de \textbf{tuplos} e \textit{printa} só a 
+    \textbf{words} usando a função \verb|getWord| e \verb|printWord|;
+    \item \verb|printBinList| - recebe uma \textbf{lista} de \textbf{tuplos} e \textit{printa} só as 
+    \textbf{bins} usando a função \textit{getBin} e \textit{printBin};
+    \item \verb|printCodeList| - recebe uma \verb|lista| de \verb|tuplos| e \textit{printa} o conteúdo
+    utilizando o \verb|printWordList| e \verb|printBinList|;
+    \item \verb|merge| - recebe dois \textbf{tuplos} cada um com a \textbf{word} e o respetivo \textbf{bin}
+    e faz \textit{append} (\verb|@|) devolvendo um único \textbf{tuplo} com a junção das \textbf{words} e 
+    do respetivo \textbf{bin};
+    \item \verb|listHeader| - recebe uma \textbf{lista} e retorna o \textbf{topo} dessa \textbf{lista};
+\end{itemize}
+
+\subsection{Funções Principais}
+
+\begin{itemize}
+    \item \verb|main| - recebe uma \textbf{lista} de \textbf{tuplos convertidos} pela função 
+    \verb|convertList| e retorna \verb|is_ambi|;
+    \item \verb|is_ambigous| - recebe uma \textbf{lista} de \textbf{tuplos} e verifica se os 
+    \textbf{bins} dessa \textbf{lista} correspondem a mais do que uma \textbf{word} utilizando 
+    a função \verb|process|. Caso não seja, retorna uma \textbf{lista vazia}, caso contrário, 
+    devolve a resposta da ambiguidade;
+    \item \verb|loop_merge| - recebe uma \textbf{lista convertida} e uma \textbf{lista vazia};
+    \item \verb|list_merge| - recebe duas \textbf{listas} e retorna uma \textbf{lista} com o 
+    conteúdo das duas \textbf{listas} sem existir repetição;
+\end{itemize}
 
 % -------------------------------------------------------------------------------------------
 \section{Conclusão} % Conclusão
-\hspace{0,5cm}Em suma, com a realização deste trabalho "Gerador de Árvores de Decisão" ficámos muito mais esclarecido sobre como é
-feito o processo para gerar um \textbf{Árvore de Decisão}. \par
-Processo este que pode ser feito com diferentes \textbf{critérios} que vão influenciar o resultado final.
-
-As principais dificuldades foram o facto de o trabalho ter sido proposto com uma linguagem de programação no qual não nos
-sentíamos à vontade, o \textbf{Python}.
-Além disso foi assegurar que as funções \verb|update_data| e \verb|applySaves| cumprissem bem a sua funcionalidade, o que infelizmente não
-foi possível.
+\hspace{0,5cm}Em suma, com a realização deste trabalho "Códigos Ambíguos" fiquei muito mais esclarecido sobre o seu funcionamento. \par
+Saliento que me ajudou a entender como funciona o escalonador e as condições que cada algoritmo (\textbf{FCFS}/\textbf{RR}), usa para proceder à mudança dos processos entre os estados e as respetivas diferenças de tempo no mesmo conjunto de processos, entre os respetivos algoritmos.
 % -------------------------------------------------------------------------------------------
 \end{document}
