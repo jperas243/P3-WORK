@@ -46,10 +46,17 @@
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=0.5\textwidth]{images/gramatica.png}
-        \caption{Exemplo de uma grmática binária}
+        \caption{Exemplo de uma gramática binária}
     \end{center}
 \end{figure}
 
+No exemplo acima, a palavra \textbf{c} é ambígua com a palavra \textbf{ps}, pois ambas as
+palavras correspondem ao mesmo código binário (\textbf{01}).
+Outro exemplo de \textbf{palavras ambíguas} é entre a palavra \textbf{l} e a palavra \textbf{sp},
+pois ambas as palavras correspondem ao mesmo código binário \textbf{10}.
+
+No nosso programa deverá mostrar unicamente as \textbf{Palavras Ambíguas} que apresentam uma
+\textbf{menor} ordem \textbf{lexicográfica}.
 % -------------------------------------------------------------------------------------------
 \section{Implementação}
 
@@ -57,10 +64,13 @@
 começámos por fazer o "pensamento" em papel. 
 
 De seguida na nossa primeira tentativa começamos por implementar tudo em \textbf{Prolog}, mas 
-chegamos à conclusão de que o nosso pensamento seria necessário ser feito na linguagem \textbf{OCaml}.
+chegamos à conclusão de que o nosso pensamento não era o mais eficaz. Pois, gerávamos todas as
+palavras possíveis e de seguida fazíamos comparações entre si.
 
-Então na nossa segunda tentativa
+Por conseguinte começámos por fazer esta implementação na linguagem \textbf{OCaml}, pois esta
+linguagem permite-nos fazer as condições de uma maneira que é mais familiar às outras linguagens.
 % -------------------------------------------------------------------------------------------
+\newpage
 \section{Funções}
 
 \subsection{Funções Auxiliares}
@@ -86,26 +96,45 @@ Então na nossa segunda tentativa
     \item \verb|merge| - recebe dois \textbf{tuplos} cada um com a \textbf{word} e o respetivo \textbf{bin}
     e faz \textit{append} (\verb|@|) devolvendo um único \textbf{tuplo} com a junção das \textbf{words} e 
     do respetivo \textbf{bin};
-    \item \verb|listHeader| - recebe uma \textbf{lista} e retorna o \textbf{topo} dessa \textbf{lista};
+    \item \verb|listHeader| - recebe uma \textbf{lista} e devolve o \textbf{topo} dessa \textbf{lista};
 \end{itemize}
 
 \subsection{Funções Principais}
 
 \begin{itemize}
     \item \verb|main| - recebe uma \textbf{lista} de \textbf{tuplos convertidos} pela função 
-    \verb|convertList| e retorna \verb|is_ambi|;
+    \verb|convertList| e devolve o resultado que são as 2 \textbf{palavras ambíguas} e o respetivo 
+    \textbf{código binário};
     \item \verb|is_ambigous| - recebe uma \textbf{lista} de \textbf{tuplos} e verifica se os 
     \textbf{bins} dessa \textbf{lista} correspondem a mais do que uma \textbf{word} utilizando 
     a função \verb|process|. Caso não seja, retorna uma \textbf{lista vazia}, caso contrário, 
-    devolve a resposta da ambiguidade;
-    \item \verb|loop_merge| - recebe uma \textbf{lista convertida} e uma \textbf{lista vazia};
+    devolve a resposta da \textbf{ambiguidade};
+    \item \verb|process| - recebe uma \textbf{lista} de \textbf{tuplos} e um determinado 
+    \textbf{tuplo} dessa lista, para cada membro dessa lista vai verificar se o \textbf{bin}
+    é igual e a \textbf{word} é diferente da que está a ser processada, caso isto aconteça
+    estamos perante uma \textbf{palavra ambígua}. Caso isto não aconteça o \verb|process|
+    retorna uma \textbf{lista} vazia.
+    A \textbf{palavra ambígua} devolvida vai ser a primeira encontrada ou a que apresenta
+    menor \textbf{word} ou a menor \textbf{bin} do que a que já tinha sido encontrada inicialmente;
+    \item \verb|loop_append| - recebe uma \textbf{lista} de \textbf{tuplos} e um determinado
+    \textbf{tuplo} e devolve uma \textbf{lista} com as combinações das \textbf{words};
+    Por exemplo, recebe \verb|[('a',01),('b', 101), ('c', 0)]| e \verb|('a')| e devolve 
+    \verb|[('aa', 0101), ('ab', 01101), ('ac', 010)]|
+    \item \verb|loop_merge| - recebe uma \textbf{lista convertida} e uma \textbf{lista vazia}, essa
+    \textbf{lista vazia} vai ser preenchida com os resultados da função \verb|loop_append|;
     \item \verb|list_merge| - recebe duas \textbf{listas} e retorna uma \textbf{lista} com o 
     conteúdo das duas \textbf{listas} sem existir repetição;
 \end{itemize}
+% -------------------------------------------------------------------------------------------
+\section{Dificuldades sentidas}
 
+Durante a elaboração do trabalho sentimos dificuldades na manipulação das \textbf{listas} e
+adaptar o nosso pensamento a \textbf{linguagens} com um pensamento \textbf{recursivo}.
 % -------------------------------------------------------------------------------------------
 \section{Conclusão} % Conclusão
-\hspace{0,5cm}Em suma, com a realização deste trabalho "Códigos Ambíguos" fiquei muito mais esclarecido sobre o seu funcionamento. \par
-Saliento que me ajudou a entender como funciona o escalonador e as condições que cada algoritmo (\textbf{FCFS}/\textbf{RR}), usa para proceder à mudança dos processos entre os estados e as respetivas diferenças de tempo no mesmo conjunto de processos, entre os respetivos algoritmos.
+\hspace{0,5cm}Em suma, com a realização deste trabalho "Códigos Ambíguos" ficámos muito mais 
+esclarecidos sobre o funcionamento de um programa que encontre os mesmos. \par
+Saliento também que nos ajudou a perceber melhor como funcionam as linguagens \textbf{declarativas},
+como \textbf{Prolog} e \textbf{OCaml}.
 % -------------------------------------------------------------------------------------------
 \end{document}
