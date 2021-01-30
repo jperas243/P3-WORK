@@ -97,6 +97,10 @@ linguagem permite-nos fazer as condições de uma maneira que é mais familiar �
     e faz \textit{append} (\verb|@|) devolvendo um único \textbf{tuplo} com a junção das \textbf{words} e 
     do respetivo \textbf{bin};
     \item \verb|listHeader| - recebe uma \textbf{lista} e devolve o \textbf{topo} dessa \textbf{lista};
+    \item \verb|result| - recebe uma \textbf{lista} e devolve um \textbf{tuplo} com o \textbf{código binário}
+    e as respetivas palavras ambíguas;
+    \item \verb|print_result| - recebe um \textbf{tuplo} e \textit{printa} as \textbf{palavras ambíguas} com
+    o respetivo \textbf{código binário} com um formato específico.
 \end{itemize}
 
 \subsection{Funções Principais}
@@ -119,11 +123,11 @@ linguagem permite-nos fazer as condições de uma maneira que é mais familiar �
     \item \verb|loop_append| - recebe uma \textbf{lista} de \textbf{tuplos} e um determinado
     \textbf{tuplo} e devolve uma \textbf{lista} com as combinações das \textbf{words};
     Por exemplo, recebe \verb|[('a',01),('b', 101), ('c', 0)]| e \verb|('a')| e devolve 
-    \verb|[('aa', 0101), ('ab', 01101), ('ac', 010)]|
+    \verb|[('aa', 0101), ('ab', 01101), ('ac', 010)]|;
     \item \verb|loop_merge| - recebe uma \textbf{lista convertida} e uma \textbf{lista vazia}, essa
     \textbf{lista vazia} vai ser preenchida com os resultados da função \verb|loop_append|;
     \item \verb|list_merge| - recebe duas \textbf{listas} e retorna uma \textbf{lista} com o 
-    conteúdo das duas \textbf{listas} sem existir repetição;
+    conteúdo das duas \textbf{listas} sem existir repetição.
 \end{itemize}
 % -------------------------------------------------------------------------------------------
 \section{Dificuldades sentidas}
