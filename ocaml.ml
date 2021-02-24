@@ -5,8 +5,8 @@
     in iterate list
 ;; *)
 
-let getWord (l,_) = l;; (* Returns the 2nd position of the tuple (word) *)
-let getBin (_,b) = b;; (* Returns the 1st position of the tuple (bin) *)
+let getWord (l,_) = l;; (* Returns the 1nd position of the tuple (word) *)
+let getBin (_,b) = b;; (* Returns the 2st position of the tuple (bin) *)
 
 let convert (l,b)=([(Char.escaped l)],b);; (* Returns the 1st position of the tuple in a list with a string *)
 let convertList list = (* Returns the list with convert in all tuples *)
@@ -65,7 +65,7 @@ let printCodList list = (* Prints using printWord and printBin*)
     print_string "]\n";
 ;;
 
-(* Mege 2 tuples, merging words and bins *)
+(* Merge 2 tuples, merging words and bins *)
 let merge (word_1,bin_1) (word_2,bin_2) = [(word_1@word_2),(bin_1@bin_2)];;
 
 (* Return the head of the list *)
@@ -97,6 +97,7 @@ let list_merge list1 list2 =
     | head :: tail ->  if List.mem head list2 then list_merge_iterate save tail
 
     else list_merge_iterate (save@[head]) tail
+
     in list_merge_iterate list2 list1
 ;;
 
@@ -164,4 +165,6 @@ printCodList (loop_append lista (["b"], [0;1]) []);;
 printCodList (list_merge lista (loop_merge lista []));; *)
 
 
+(* print_result (result (main test));; *)
 print_result (result (main (convertList ex1)));;
+(* print_result (result (main (convertList ex2)));; *)
